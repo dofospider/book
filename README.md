@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-11 15:55:20
- * @lastTime: 2020-12-13 11:07:24
+ * @lastTime: 2020-12-13 11:10:55
  * @LastAuthor: Do not edit
 -->
 # book
@@ -17,4 +17,5 @@ learn book for flask &amp;vue
 - 20201213 00:03 rm -rf  document env in flask,craat a new virtualenv in books_flask documents.
 - 20201213 00:10 creat book.py main.py settings.py and pip freeze >requirements.txt.
 - 20201213 00:23 pip install pymysql flask and update requirements.txt file.
-- 20201213 11:06 fix git in vscode.push it. 
+- 20201213 11:06 fix git in vscode.push it.
+-  
