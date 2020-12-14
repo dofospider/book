@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:24
-lastTime: 2020-12-13 15:45:51
+lastTime: 2020-12-15 00:45:43
 LastAuthor: Do not edit
 '''
 from flask import Flask
@@ -16,7 +16,7 @@ app=Flask(__name__)
 app.config['JSON_AS_ASCII']=False
 
 
-@app.route('/' )
+@app.route('/',methods=['GET','POST'] )
 def hello_world():
     book=Book()
     arrData=book.get_books_info_limit()

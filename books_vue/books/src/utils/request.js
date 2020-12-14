@@ -1,7 +1,7 @@
 /*
  * @Author: dofospider
  * @since: 2020-12-14 12:33:43
- * @lastTime: 2020-12-14 12:33:57
+ * @lastTime: 2020-12-15 00:42:48
  * @LastAuthor: Do not edit
  */
 import axios from "axios";
@@ -11,7 +11,8 @@ import axios from "axios";
 // console.log("in request.js", process.env.VUE_APP_URL);
 
 // axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? '' : '/api';  //关键代码
-const BASEURL = process.env.NODE_ENV === "production" ? "/api" : "/api";
+const BASEURL = process.env.NODE_ENV === "production" ? "" : "/api";
+// const BASEURL = process.env.NODE_ENV === "production" ? "/api" : "/api";
 // console.log("in request.js: BASEURL = ", BASEURL);
 
 // 创建axios

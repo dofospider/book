@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-11 15:55:20
- * @lastTime: 2020-12-14 00:49:47
+ * @lastTime: 2020-12-14 20:44:45
  * @LastAuthor: Do not edit
 -->
 # book
@@ -19,4 +19,5 @@ learn book for flask &amp;vue
 - 20201213 00:23 pip install pymysql flask and update requirements.txt file.
 - 20201213 11:06 fix git in vscode.push it.
 - 20201214 00:49 link mysql database&write settings files.
+- 20201214 20:45 offer some change but it must would not work well.
 -  
