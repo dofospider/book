@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-11 15:55:20
- * @lastTime: 2020-12-14 20:44:45
+ * @lastTime: 2020-12-16 23:34:00
  * @LastAuthor: Do not edit
 -->
 # book
@@ -20,4 +20,6 @@ learn book for flask &amp;vue
 - 20201213 11:06 fix git in vscode.push it.
 - 20201214 00:49 link mysql database&write settings files.
 - 20201214 20:45 offer some change but it must would not work well.
--  
+- 20201216 16:59 change the vue version to 2.6 reslove the old questions. it used my one day more. 
+- 20201216 17:13 create a empty project ready for start.
+- 20201216 23:33 orgin layout complate. 

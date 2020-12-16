@@ -1,7 +1,7 @@
 /*
  * @Author: dofospider
  * @since: 2020-12-16 14:49:16
- * @lastTime: 2020-12-16 17:08:23
+ * @lastTime: 2020-12-16 17:36:47
  * @LastAuthor: Do not edit
  */
 import Vue from "vue";
@@ -11,10 +11,24 @@ import Home from "../views/Home.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  {
+  {// 网站首页
     path: "/",
     name: "Home",
     component: Home
+
+//网站分类页面
+
+
+// 图书首页
+
+
+
+// 图书详情页
+
+
+
+
+
   },
   // {
   //   path: "/about",
