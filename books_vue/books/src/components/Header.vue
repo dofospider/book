@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-16 17:38:00
- * @lastTime: 2020-12-16 17:41:22
+ * @lastTime: 2020-12-17 00:30:04
  * @LastAuthor: Do not edit
 -->
  <template>
@@ -14,10 +14,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#">Link0</b-nav-item>
-          <b-nav-item href="#">Link1</b-nav-item>
-          <b-nav-item href="#">Link2</b-nav-item>
-          <b-nav-item href="#">Link3</b-nav-item>
+          <b-nav-item v v-for="item in headData.headers" :key="item.id" :href="item.url">{{item.text}}</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -39,7 +36,28 @@
 </template>
 
 <script>
-export default {};
+import {GetCates} from "../apis/read.js";
+import {reactive,ref} from "@vue/composition-api";
+
+
+export default {
+  name:"Header",
+  setup(props,context){
+
+    const headData=reactive({
+      headers:[]
+    });
+    GetCates().then(response =>{
+      console.log("In Header reponse= ",response.data.data)
+      headData.headers=response.data.data;
+      console.log("headData.headers=",headData.headers)
+    });
+
+    return{
+      headData
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
