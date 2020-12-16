@@ -1,7 +1,7 @@
 /*
  * @Author: dofospider
- * @since: 2020-12-14 12:13:54
- * @lastTime: 2020-12-14 12:13:54
+ * @since: 2020-12-16 15:31:01
+ * @lastTime: 2020-12-16 15:35:27
  * @LastAuthor: Do not edit
  */
 const path = require("path");
@@ -85,7 +85,7 @@ module.exports = {
   // webpack-dev-server 相关配置
   devServer: {
     open: process.platform === "darwin",
-    host: "localhost",
+    host: "0.0.0.0",
     port: 8081,
     https: false,
     hotOnly: false,

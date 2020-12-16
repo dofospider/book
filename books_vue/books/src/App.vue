@@ -1,19 +1,11 @@
-<!--
- * @Author: dofospider
- * @since: 2020-12-14 10:09:27
- * @lastTime: 2020-12-14 17:45:17
- * @LastAuthor: Do not edit
--->
 <template>
+  <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-
+    </div>
     <router-view />
-
   </div>
-
- 
 </template>
 
 <style lang="scss">

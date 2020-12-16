@@ -1,16 +1,15 @@
 /*
  * @Author: dofospider
- * @since: 2020-12-14 10:09:27
- * @lastTime: 2020-12-15 00:53:56
+ * @since: 2020-12-16 14:49:16
+ * @lastTime: 2020-12-16 16:56:40
  * @LastAuthor: Do not edit
  */
-import { createApp } from "vue";
-// import Vue from 'vue';
+import Vue from "vue";
 import App from "./App.vue";
-
 import router from "./router";
 import store from "./store";
-import vueCompositionAPI from "@vue/composition-api";
+import VueCompositionApi from "@vue/composition-api";
+
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -19,13 +18,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 
+Vue.use(VueCompositionApi);
 
-Vue.use(vueCompositionAPI);
+Vue.config.productionTip = false;
 
-Vue.config.productionTip=false;
-
-
-createApp(App)
-  .use(store)
-  .use(router)
-  .mount("#app");
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount("#app");
