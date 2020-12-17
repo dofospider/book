@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:24
-lastTime: 2020-12-17 23:32:10
+lastTime: 2020-12-18 01:06:35
 LastAuthor: Do not edit
 '''
 from flask import Flask,request
@@ -37,7 +37,7 @@ def get_books_cates():
             {"id":6,"text":'科幻',"url":'/kehuan'},
             {"id":7,"text":'言情',"url":'/yanqing'},
             {"id":8,"text":'其他',"url":'/qita'},
-            {"id":9,"text":'完本',"url":'/wanben'},
+            {"id":9,"text":'完本',"url":'/quanben'},
         ],
         "message":'对本次请求的说明'
     }

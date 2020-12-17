@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:39
-lastTime: 2020-12-17 23:33:14
+lastTime: 2020-12-18 01:07:13
 LastAuthor: Do not edit
 '''
 MYSQL_HOST='127.0.0.1'
@@ -22,5 +22,5 @@ BOOK_LIST=[
     'kehuan',
     'yanqing',
     'qita',
-    'wanben',
+    'quanben',
 ]
