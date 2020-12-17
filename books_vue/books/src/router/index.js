@@ -1,35 +1,40 @@
 /*
  * @Author: dofospider
  * @since: 2020-12-16 14:49:16
- * @lastTime: 2020-12-16 17:36:47
+ * @lastTime: 2020-12-17 17:11:47
  * @LastAuthor: Do not edit
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import HomeCate from "../views/HomeCate.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {// 网站首页
+const routes = [{ // 网站首页
     path: "/",
     name: "Home",
     component: Home
-
-//网站分类页面
-
-
-// 图书首页
-
-
-
-// 图书详情页
-
-
-
-
-
   },
+
+  //网站分类页面
+  {
+    path: "/:cate_id",
+    name: "HomeCate:",
+    component: HomeCate
+  },
+
+  // 图书首页
+
+
+
+  // 图书详情页
+
+
+
+
+
+
   // {
   //   path: "/about",
   //   name: "About",
@@ -42,6 +47,8 @@ const routes = [
 ];
 
 const router = new VueRouter({
+  mode:"history",
+  base:process.env.base_URL,
   routes
 });
 

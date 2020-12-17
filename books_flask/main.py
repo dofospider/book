@@ -3,12 +3,13 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:24
-lastTime: 2020-12-17 00:13:29
+lastTime: 2020-12-17 18:04:55
 LastAuthor: Do not edit
 '''
-from flask import Flask
+from flask import Flask,request
 from flask.json import jsonify
 from book import Book
+import json
 
 
 app=Flask(__name__)
@@ -37,7 +38,33 @@ def get_books_cates():
         "message":'对本次请求的说明'
     }
 
-    return resData
+    return jsonify(resData)
+
+
+@app.route('/<string:book_cate>',methods=['POST'])
+def get_cates_infos(book_cate):
+
+    """
+    docstring
+    """
+    if request.method=='POST':
+        pass
+        print("in nomal case")
+        get_data=json.loads(request.get_data(as_text=True))
+        key=get_data['key']
+
+        return 
+    else:
+        resData={
+            "resCode":1,
+            "data":[],
+            "message":'request function error!',
+        }
+        print('in resdata')
+        return jsonify(resData)
+
+    
+
 
 @app.route('/',methods=['GET','POST'] )
 def hello_world():

@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-11 15:55:20
- * @lastTime: 2020-12-17 00:33:37
+ * @lastTime: 2020-12-17 18:06:39
  * @LastAuthor: Do not edit
 -->
 # book
@@ -24,3 +24,4 @@ learn book for flask &amp;vue
 - 20201216 17:13 create a empty project ready for start.
 - 20201216 23:33 orgin layout complate. 
 - 20201217 00:33 finish third day. wow..
+- 20201217 18:06 over work.
