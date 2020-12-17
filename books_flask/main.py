@@ -3,13 +3,17 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:24
-lastTime: 2020-12-17 18:04:55
+lastTime: 2020-12-17 23:32:10
 LastAuthor: Do not edit
 '''
 from flask import Flask,request
 from flask.json import jsonify
 from book import Book
+from settings import BOOK_LIST
+
 import json
+
+
 
 
 app=Flask(__name__)
@@ -53,7 +57,31 @@ def get_cates_infos(book_cate):
         get_data=json.loads(request.get_data(as_text=True))
         key=get_data['key']
 
-        return 
+        if book_cate in BOOK_LIST:
+
+            if key =='newest':
+                
+                book=Book()
+                sqldata=book.get_cates_newest_books_30(book_cate)
+                resData={
+                    "resCode":0,
+                    "data":sqldata,
+                    "message":'the newest refresh book information'
+                }
+                return jsonify(resData)
+                pass
+            elif key=='most':
+                pass
+            else:
+                resData={
+                    "resCode":2,
+                    "data":[],
+                    "message":'error prament',
+                }
+
+            return jsonify(resData) 
+        else:
+            return {"resCode":404}
     else:
         resData={
             "resCode":1,
