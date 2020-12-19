@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:24
-lastTime: 2020-12-18 01:06:35
+lastTime: 2020-12-19 23:05:10
 LastAuthor: Do not edit
 '''
 from flask import Flask,request
@@ -71,7 +71,14 @@ def get_cates_infos(book_cate):
                 return jsonify(resData)
                 pass
             elif key=='most':
-                pass
+                book=Book()
+                sqldata=book.get_cates_most_books_30(book_cate)
+                resData={
+                    "resCode":0,
+                    "data":sqldata,
+                    "message":'the most views book information' 
+                }
+                return jsonify(resData) 
             else:
                 resData={
                     "resCode":2,

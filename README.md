@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-11 15:55:20
- * @lastTime: 2020-12-18 01:02:16
+ * @lastTime: 2020-12-19 23:35:50
  * @LastAuthor: Do not edit
 -->
 # book
@@ -26,3 +26,4 @@ learn book for flask &amp;vue
 - 20201217 00:33 finish third day. wow..
 - 20201217 18:06 over work.
 - 20201218 01:02 finish fourth day. wow..
+- 20201219 23:34 begin fourth-one day,then learn how to get falsk the use page & list a sequence in page.

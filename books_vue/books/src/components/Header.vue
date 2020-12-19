@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-16 17:38:00
- * @lastTime: 2020-12-17 00:30:04
+ * @lastTime: 2020-12-19 23:32:10
  * @LastAuthor: Do not edit
 -->
  <template>
@@ -14,7 +14,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item v v-for="item in headData.headers" :key="item.id" :href="item.url">{{item.text}}</b-nav-item>
+          <b-nav-item v v-for="item in headData.headers" :key="item.id" :href="item.url" :class="item.url == now_url ? 'active':''">{{item.text}}</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -43,7 +43,7 @@ import {reactive,ref} from "@vue/composition-api";
 export default {
   name:"Header",
   setup(props,context){
-
+    const now_url=ref(context.root.$route.path);
     const headData=reactive({
       headers:[]
     });
@@ -54,7 +54,8 @@ export default {
     });
 
     return{
-      headData
+      headData,
+      now_url,
     }
   }
 };

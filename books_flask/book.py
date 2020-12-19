@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:14
-lastTime: 2020-12-18 00:51:50
+lastTime: 2020-12-19 21:12:01
 LastAuthor: Do not edit
 '''
 from pymysql import connect
@@ -67,4 +67,16 @@ class Book(object):
         for temp in self.cursor.fetchall():
             data.append(temp)
 
+        return data
+
+    def get_cates_most_books_30(self, book_cate):
+        """
+        get most books
+        """
+        sql = 'select * from book_infos where book_cate="{}" order by book_newest_url desc limit 30;'.format(book_cate)
+
+        self.cursor.execute(sql)
+        data=[]
+        for temp in self.cursor.fetchall():
+            data.append(temp)
         return data
