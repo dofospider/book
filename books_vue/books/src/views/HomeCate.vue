@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-17 16:19:21
- * @lastTime: 2020-12-19 23:06:22
+ * @lastTime: 2020-12-20 00:17:17
  * @LastAuthor: Do not edit
 -->
 <template>
@@ -119,6 +119,7 @@ export default {
 
     const items = reactive({
       newestItems: [],
+      mostItems:[],
     });
     const mostParams = reactive({
       url: now_url.value,
@@ -132,7 +133,7 @@ export default {
 
     GetInfoPost(mostParams).then((resp) => {
       console.log(resp);
-      items.mostItems=resp.data.data;
+      items.mostItems = resp.data.data;
     });
 
     onMounted(() => {
