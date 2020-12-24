@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:24
-lastTime: 2020-12-19 23:05:10
+lastTime: 2020-12-25 00:40:40
 LastAuthor: Do not edit
 '''
 from flask import Flask,request
@@ -107,6 +107,48 @@ def hello_world():
     arrData=book.get_books_info_limit()
 
     return jsonify(arrData)
+
+@app.route('/book/<int:book_id>',methods=['POST'])
+def get_book_infos_by_id(book_id):
+    """
+    book profoment infomation
+    """
+    if request.method=='POST':
+        get_data=json.loads(request.get_data(as_text=True))
+        key=get_data['key']
+        secretKey=get_data['secretKey']
+        if key=='index':
+            book=Book()
+            sql_data=book.get_book_infos_by_book_id(book_id)
+            resData={
+                "resCode":0,
+                "data":sql_data,
+                "message":'book information'
+            }
+            return jsonify(resData)
+            pass
+        elif key =='cap20Params':
+            pass
+        elif key == 'all':
+            pass
+
+        else:
+            resData={
+                "resCode":1,
+                "data":[],
+                "message":'error default'
+            }
+            return jsonify(resData)
+
+    else:
+        resData={
+            "resCode":1,
+            "data":[],
+            "message":'request function error!',
+        }
+        print('in resdata')
+
+
 
 if __name__=='__main__':
     app.run(host='127.0.0.1',port=8080,debug=True)

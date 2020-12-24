@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:14
-lastTime: 2020-12-19 21:12:01
+lastTime: 2020-12-25 00:02:41
 LastAuthor: Do not edit
 '''
 from pymysql import connect
@@ -75,6 +75,18 @@ class Book(object):
         """
         sql = 'select * from book_infos where book_cate="{}" order by book_newest_url desc limit 30;'.format(book_cate)
 
+        self.cursor.execute(sql)
+        data=[]
+        for temp in self.cursor.fetchall():
+            data.append(temp)
+        return data
+
+
+    def get_book_infos_by_book_id(self, book_id):
+        """
+        show bookindex page's data
+        """
+        sql="select * from book_infos where book_id='{}'".format(book_id)
         self.cursor.execute(sql)
         data=[]
         for temp in self.cursor.fetchall():
