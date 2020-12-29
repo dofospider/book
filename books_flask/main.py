@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:24
-lastTime: 2020-12-25 00:40:40
+lastTime: 2020-12-30 00:35:53
 LastAuthor: Do not edit
 '''
 from flask import Flask,request
@@ -53,7 +53,7 @@ def get_cates_infos(book_cate):
     """
     if request.method=='POST':
         pass
-        print("in nomal case")
+        # print("in nomal case")
         get_data=json.loads(request.get_data(as_text=True))
         key=get_data['key']
 
@@ -119,19 +119,77 @@ def get_book_infos_by_id(book_id):
         secretKey=get_data['secretKey']
         if key=='index':
             book=Book()
-            sql_data=book.get_book_infos_by_book_id(book_id)
-            resData={
-                "resCode":0,
-                "data":sql_data,
-                "message":'book information'
-            }
-            return jsonify(resData)
+            try:
+                
+                sql_data=book.get_book_infos_by_book_id(book_id)
+                if sql_data==[]:
+                    raise IndexError('error index')
+            except Exception as r:
+                
+                resData={
+                    "resCode":1,
+                    "data":[],
+                    "message":'error'
+                    }
+                return jsonify(resData)
+            else:
+                resData={
+                    "resCode":0,
+                    "data":sql_data,
+                    "message":'book information'
+                }
+                return jsonify(resData)
             pass
-        elif key =='cap20Params':
-            pass
-        elif key == 'all':
-            pass
+        elif key =='cap20':
+            book=Book()
+            try:
+                
+                sql_data=book.get_book_infos_by_book_id(book_id)
+                # print(sql_data)
+                if sql_data==[]:
+                    raise IndexError('error index')
+            except Exception as r:
+                
+                resData={
+                    "resCode":1,
+                    "data":[],
+                    "message":'r'
+                    }
+                return jsonify(resData)
+            else:
 
+                cap_20_data=book.get_book_newest_20_caps_by_book_id(book_id)   
+                resData={
+                    "resCode":0,
+                    "data":cap_20_data,
+                    "message":'all capter information'
+                    }
+                return jsonify(resData)
+        elif key == 'all':
+            book=Book()
+            try:
+                
+                sql_data=book.get_book_infos_by_book_id(book_id)
+                if sql_data==[]:
+                    raise IndexError('error index')
+            except Exception as r:
+                
+                resData={
+                    "resCode":1,
+                    "data":[],
+                    "message":'r'
+                    }
+                return jsonify(resData)
+            else:
+
+                all_cap_data=book.get_book_all_caps_by_book_id(book_id)   
+                # print(all_cap_data) 
+                resData={
+                    "resCode":0,
+                    "data":all_cap_data,
+                    "message":'all capter information'
+                    }
+                return jsonify(resData)
         else:
             resData={
                 "resCode":1,
@@ -146,7 +204,6 @@ def get_book_infos_by_id(book_id):
             "data":[],
             "message":'request function error!',
         }
-        print('in resdata')
 
 
 

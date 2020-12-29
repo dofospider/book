@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:14
-lastTime: 2020-12-25 00:02:41
+lastTime: 2020-12-30 00:15:27
 LastAuthor: Do not edit
 '''
 from pymysql import connect
@@ -87,8 +87,43 @@ class Book(object):
         show bookindex page's data
         """
         sql="select * from book_infos where book_id='{}'".format(book_id)
-        self.cursor.execute(sql)
-        data=[]
-        for temp in self.cursor.fetchall():
-            data.append(temp)
-        return data
+        try:
+            self.cursor.execute(sql)
+        except Exception as e:
+            return e
+        else:
+            data=[]
+            for temp in self.cursor.fetchall():
+                data.append(temp)
+            return data
+
+    def get_book_all_caps_by_book_id(self, book_id):
+        """
+        get book all caps
+        """
+        sql='select id,book_id,sort_id,detail_title from book_details where book_id="{}" order by sort_id'.format(book_id)
+        try:
+            self.cursor.execute(sql)
+        except Exception as e:
+            return e
+        else:
+            data=[]
+            for temp in self.cursor.fetchall():
+                data.append(temp)
+            return data
+
+    def get_book_newest_20_caps_by_book_id(self, book_id):
+        """
+        get the least 20 capter     
+        """
+        
+        sql='select id,book_id,sort_id,detail_title from book_details where book_id="{}" order by sort_id desc limit 20'.format(book_id)
+        try:
+            self.cursor.execute(sql)
+        except Exception as e:
+            return e
+        else:
+            data=[]
+            for temp in self.cursor.fetchall():
+                data.append(temp)
+            return data
