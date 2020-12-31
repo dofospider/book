@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:14
-lastTime: 2020-12-30 00:15:27
+lastTime: 2020-12-31 23:37:12
 LastAuthor: Do not edit
 '''
 from pymysql import connect
@@ -126,4 +126,64 @@ class Book(object):
             data=[]
             for temp in self.cursor.fetchall():
                 data.append(temp)
+            return data
+
+
+    def get_book_detail_by_book_id_sort_id(self, book_id,sort_id):
+        """
+        get book detail by book_id & sort_id
+        """
+        sql='select * from book_details where book_id="{}" and sort_id="{}";'.format(book_id,sort_id)
+        try:
+            self.cursor.execute(sql)
+        except Exception as e:
+            # print(e)
+            return e
+        else:
+            data=[]
+            for temp in self.cursor.fetchall():
+                data.append(temp)
+                # print(temp)
+            return data
+
+
+    def get_pre_cap_id(self, book_id,sort_id):
+        """
+        get net capter id
+        """
+        sql="select sort_id from book_details where book_id='{}' and sort_id<'{}' order by sort_id desc limit 1".format(book_id,sort_id)
+        
+
+        try:
+            self.cursor.execute(sql)
+        except Exception as e:
+            # print(e)
+            return e
+        else:
+            data=[]
+            for temp in self.cursor.fetchall():
+                data.append(temp)
+                # print(temp)
+            # print(data)
+            return data
+
+
+    def get_next_cap_id(self, book_id,sort_id):
+        """
+        get net capter id
+        """
+        sql="select sort_id from book_details where book_id='{}' and sort_id>'{}' order by sort_id  limit 1".format(book_id,sort_id)
+        
+
+        try:
+            self.cursor.execute(sql)
+        except Exception as e:
+            # print(e)
+            return e
+        else:
+            data=[]
+            for temp in self.cursor.fetchall():
+                data.append(temp)
+                # print(temp)
+            # print(data)
             return data

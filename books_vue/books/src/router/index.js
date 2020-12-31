@@ -1,7 +1,7 @@
 /*
  * @Author: dofospider
  * @since: 2020-12-16 14:49:16
- * @lastTime: 2020-12-23 16:51:18
+ * @lastTime: 2020-12-31 00:07:31
  * @LastAuthor: Do not edit
  */
 import Vue from "vue";
@@ -9,7 +9,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import HomeCate from "../views/HomeCate.vue";
 import BookIndex from "../views/BookIndex.vue";
-
+import BookDetail from "../views/BookDetail";
 
 Vue.use(VueRouter);
 
@@ -31,12 +31,16 @@ const routes = [{ // 网站首页
   path:"/book/:book_id",
   name:"BookIndex",
   component:BookIndex, 
-}
+},
 
 
   // 图书详情页
 
-
+{
+  path:"/book/:book_id/:sort_id",
+  name:"BookDetail",
+  component:BookDetail,
+}
 
 
 

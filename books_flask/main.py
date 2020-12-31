@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:24
-lastTime: 2020-12-30 00:35:53
+lastTime: 2020-12-31 23:57:45
 LastAuthor: Do not edit
 '''
 from flask import Flask,request
@@ -204,8 +204,59 @@ def get_book_infos_by_id(book_id):
             "data":[],
             "message":'request function error!',
         }
+        return jsonify(resData)
 
+@app.route('/book/<int:book_id>/<int:sort_id>',methods=['POST'])
+def get_book_detail_infos(book_id,sort_id):
+    """
+    get_book_detail_infos
+    """
+    if request.method=='POST':
+        book=Book()
+        sql_book_id_data=book.get_book_infos_by_book_id(book_id)
+        if len(sql_book_id_data)==0:
+            resData={
+                "resCode":1,
+                "data":[],
+                "message":'error book infos',
+            }
+            # print('ee')
+            return jsonify(resData)
+        
+        sort_book_details=book.get_book_detail_by_book_id_sort_id(book_id,sort_id)
+        try:
+            preItems=book.get_pre_cap_id(book_id,sort_id)[0]['sort_id']
+        except Exception  as identifier:
+            preItems=''
+        else:
+            preItems
 
+        try:
+            nextItems=book.get_next_cap_id(book_id,sort_id)[0]['sort_id']
+        except Exception as identifier:
+            nextItems=''
+        else:
+            nextItems
+
+        sort_book_details[0]['book_name']=sql_book_id_data[0]['book_name']
+        sort_book_details[0]['pre_id']=preItems
+        sort_book_details[0]['next_id']=nextItems
+        # print(sort_book_details)
+        resData={
+            "resCode":0,
+            "data":sort_book_details,
+            "message":'all book infos',
+        }
+        # print(sql_book_id_data)
+        return jsonify(resData)
+    else:
+        resData={
+            "resCode":1,
+            "data":[],
+            "message":'request function error!',
+        }
+        return jsonify(resData)
+        
 
 if __name__=='__main__':
     app.run(host='127.0.0.1',port=8080,debug=True)

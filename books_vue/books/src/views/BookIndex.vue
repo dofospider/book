@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-23 16:50:41
- * @lastTime: 2020-12-30 00:31:47
+ * @lastTime: 2021-01-01 00:08:22
  * @LastAuthor: Do not edit
 -->
 <template>
@@ -37,7 +37,7 @@
               <div>本书状态:{{ items.indexItems[0].book_status }}</div>
 
               <hr class="my-4" />
-              <p>it uses for novle informations.</p>
+              <p> 小说简介:{{ items.indexItems[0].book_desc }}</p>
               <b-button
                 pill
                 variant="primary"
@@ -57,7 +57,7 @@
             </b-jumbotron>
           </b-col>
         </b-row>
-        小说简介:{{ items.indexItems[0].book_desc }}
+       
 
         <b-row>
           <b-col><h6>最近更新的20个章节</h6></b-col>
@@ -90,7 +90,7 @@
           >
         </b-row>
       </b-container>
-
+    
       <b-container v-else>图书不存在
     </b-container>
     <Footer />
