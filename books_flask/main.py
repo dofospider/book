@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:24
-lastTime: 2021-01-08 23:29:52
+lastTime: 2021-01-09 01:23:50
 LastAuthor: Do not edit
 '''
 from flask import Flask,request
@@ -102,7 +102,7 @@ def get_cates_infos(book_cate):
             "data":[],
             "message":'request function error!',
         }
-        print('in resdata')
+        # print('in resdata')
         return jsonify(resData)
 
     
@@ -255,6 +255,7 @@ def get_book_detail_infos(book_id,sort_id):
             "message":'all book infos',
         }
         # print(sql_book_id_data)
+        # print(sort_book_details)
         return jsonify(resData)
     else:
         resData={

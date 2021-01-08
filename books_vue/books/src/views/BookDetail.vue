@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-30 23:52:48
- * @lastTime: 2021-01-08 22:11:46
+ * @lastTime: 2021-01-09 01:22:34
  * @LastAuthor: Do not edit
 -->
 <template>
@@ -30,7 +30,9 @@
           <a :href="'/book/'+items.detailsItems[0].book_id+'/'+items.detailsItems[0].next_id" >下一页</a> </b-col>  
           </b-row>
       <b-row> <b-col>
-        <h2>{{items.detailsItems[0].detail_content}}</h2>
+        <!-- <h2>{{items.detailsItems[0].detail_content}}</h2> -->
+        <h3 v-html="items.detailsItems[0].detail_content.replace(/[\xa0]{4}/gi,'<br/> &nbsp; &nbsp; &nbsp; &nbsp;').replace(/[\u3000]/gi,'')"></h3>
+        <!-- <p v-html=''>{{items.detailsItems[0].detail_content.replace(/[\xa0]{4}/gi, '<br/>')}}</p> -->
         </b-col></b-row>
       
       
@@ -66,12 +68,14 @@ export default {
     Header,
     Footer,
   },
-
+  
   setup(props, context) {
     const detailPrams = reactive({
       url: context.root.$route.path,
       key: "",
     });
+
+    
 
     const items = reactive({
       detailsItems: [],
@@ -80,6 +84,8 @@ export default {
       console.log('book detail',resp.data.data);
       items.detailsItems = resp.data.data;
     });
+
+    // var content = this.content.replace(/\r\n/g, '<br/>').replace(/\n/g, '<br/>').replace(/\s/g, '&nbsp;');
 
     return {
       items,
