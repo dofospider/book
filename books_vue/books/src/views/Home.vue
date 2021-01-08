@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-16 14:49:16
- * @lastTime: 2020-12-16 23:21:28
+ * @lastTime: 2021-01-08 23:42:11
  * @LastAuthor: Do not edit
 -->
 <template>
@@ -27,5 +27,11 @@ export default {
     Header,
     Footer,
   },
+  setup(props,context){
+    document.title="蜘蛛大人的小说";
+    document.querySelector("meta[name='keywords']").setAttribute("content","蜘蛛大人的keywords");
+    document.querySelector("meta[name='description']").setAttribute('content',"蜘蛛大人的descrption");
+
+  }
 };
 </script>

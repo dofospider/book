@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-30 23:52:48
- * @lastTime: 2021-01-01 00:06:31
+ * @lastTime: 2021-01-08 22:11:46
  * @LastAuthor: Do not edit
 -->
 <template>
@@ -30,7 +30,7 @@
           <a :href="'/book/'+items.detailsItems[0].book_id+'/'+items.detailsItems[0].next_id" >下一页</a> </b-col>  
           </b-row>
       <b-row> <b-col>
-        {{items.detailsItems[0].detail_content}}
+        <h2>{{items.detailsItems[0].detail_content}}</h2>
         </b-col></b-row>
       
       
@@ -47,7 +47,6 @@
         <b-col v-else>
           <a :href="'/book/'+items.detailsItems[0].book_id+'/'+items.detailsItems[0].next_id" >下一页</a> </b-col>  
           </b-row>
-
 
     </b-container>
     <b-container>
@@ -71,15 +70,14 @@ export default {
   setup(props, context) {
     const detailPrams = reactive({
       url: context.root.$route.path,
-      // url: ref(context.root.$route.path).value,
       key: "",
     });
 
     const items = reactive({
       detailsItems: [],
     });
-    GetInfoPost(detailPrams).then((resp) => {
-      console.log(resp.data);
+    GetInfoPost(detailPrams).then(resp => {
+      console.log('book detail',resp.data.data);
       items.detailsItems = resp.data.data;
     });
 

@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:14
-lastTime: 2020-12-31 23:37:12
+lastTime: 2021-01-08 00:55:18
 LastAuthor: Do not edit
 '''
 from pymysql import connect
@@ -146,6 +146,18 @@ class Book(object):
                 # print(temp)
             return data
 
+    def search_infos_by_key(self,key):
+        print('key in book {}',key)
+        sql='select * from book_infos where book_name="{}" or book_author="{}";'.format(key,key)
+        self.cursor.execute(sql)
+
+        data=[]
+        for temp in self.cursor.fetchall():
+            data.append(temp)
+        print('data',data)
+        return data
+
+
 
     def get_pre_cap_id(self, book_id,sort_id):
         """
@@ -187,3 +199,4 @@ class Book(object):
                 # print(temp)
             # print(data)
             return data
+

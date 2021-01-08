@@ -3,7 +3,7 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:24
-lastTime: 2020-12-31 23:57:45
+lastTime: 2021-01-08 23:29:52
 LastAuthor: Do not edit
 '''
 from flask import Flask,request
@@ -12,13 +12,20 @@ from book import Book
 from settings import BOOK_LIST
 
 import json
-
+import re
 
 
 
 app=Flask(__name__)
 
 app.config['JSON_AS_ASCII']=False
+
+def is_string_validate(str):
+    sub_str=re.sub(u"([^\u4e00-\u9fa5\u0030-\u0039\u0041-\u005a\u0061-\u007a])","",str)
+    if len(str)==len(sub_str):
+        return False
+    else:
+        return True
 
 @app.route('/books_cates',methods=['GET'])
 def get_books_cates():
@@ -257,6 +264,44 @@ def get_book_detail_infos(book_id,sort_id):
         }
         return jsonify(resData)
         
+@app.route('/search',methods=['POST'])
+def serach_info():
+    if request.method =='POST':
+        get_data=json.loads(request.get_data(as_text=True))
+        key=get_data['key']
+        secretKey=get_data['secretKey']
+        if is_string_validate(key):
+            resData={
+                "resCode":1,
+                "data":[],
+                "message":'error param',
+            }
+        book=Book()
+        search_data=book.search_infos_by_key(key)
+        if len(search_data)==0:
+            resData={
+                "resCode":0,
+                "data":[],
+                "message":'empty data!'
+            }
+            return jsonify(resData)
+        resData={
+            "resCode":0,
+            "data":search_data,
+            "message":'search resoult'
+
+        }
+        return jsonify(resData)
+
+
+    else:
+        resData={
+            "resCode":1,
+            "data":[],
+            "message":'request fun error!'
+        }
+        
+        return jsonify(resData)
 
 if __name__=='__main__':
     app.run(host='127.0.0.1',port=8080,debug=True)

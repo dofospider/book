@@ -1,7 +1,7 @@
 /*
  * @Author: dofospider
  * @since: 2020-12-16 14:49:16
- * @lastTime: 2020-12-31 00:07:31
+ * @lastTime: 2021-01-06 22:54:45
  * @LastAuthor: Do not edit
  */
 import Vue from "vue";
@@ -10,6 +10,7 @@ import Home from "../views/Home.vue";
 import HomeCate from "../views/HomeCate.vue";
 import BookIndex from "../views/BookIndex.vue";
 import BookDetail from "../views/BookDetail";
+import BookSearch from "../views/BookSearch"
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,14 @@ const routes = [{ // 网站首页
     component: Home
   },
 
+  //search
+  {
+    path: "/search",
+    name: "BookSearch",
+    component: BookSearch,
+  },
+
+
   //网站分类页面
   {
     path: "/:cate_id",
@@ -27,20 +36,20 @@ const routes = [{ // 网站首页
   },
 
   // 图书首页
-{
-  path:"/book/:book_id",
-  name:"BookIndex",
-  component:BookIndex, 
-},
+  {
+    path: "/book/:book_id",
+    name: "BookIndex",
+    component: BookIndex,
+  },
 
 
   // 图书详情页
 
-{
-  path:"/book/:book_id/:sort_id",
-  name:"BookDetail",
-  component:BookDetail,
-}
+  {
+    path: "/book/:book_id/:sort_id",
+    name: "BookDetail",
+    component: BookDetail,
+  },
 
 
 
@@ -57,8 +66,8 @@ const routes = [{ // 网站首页
 ];
 
 const router = new VueRouter({
-  mode:"history",
-  base:process.env.base_URL,
+  mode: "history",
+  base: process.env.base_URL,
   routes
 });
 

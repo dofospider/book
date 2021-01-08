@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-16 17:38:00
- * @lastTime: 2020-12-19 23:32:10
+ * @lastTime: 2021-01-08 23:11:43
  * @LastAuthor: Do not edit
 -->
  <template>
@@ -19,7 +19,7 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-form>
+          <!-- <b-nav-form>
             <b-form-input
               size="sm"
               class="mr-sm-2"
@@ -28,7 +28,11 @@
             <b-button size="sm" class="my-2 my-sm-0" type="submit"
               >开始查询</b-button
             >
-          </b-nav-form>
+          </b-nav-form> -->
+    <div class='form-inline'>
+        <input  v-model="search.key" type="text"  placeholder="输入图书名字或者作者名字" class="mr-sm-2 form-control form-control-sm">
+        <button @click=onSearch type="submit" class='btn my-2 my-sm-0 btn-secondary btn-sm'>开始查询</button>
+</div>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -37,7 +41,8 @@
 
 <script>
 import {GetCates} from "../apis/read.js";
-import {reactive,ref} from "@vue/composition-api";
+import {reactive,ref,onMounted} from "@vue/composition-api";
+import { stripscript } from "../apis/validate";
 
 
 export default {
@@ -53,9 +58,36 @@ export default {
       console.log("headData.headers=",headData.headers)
     });
 
+    onMounted(()=>{
+      console.log("in Header search,key=",search.key)
+    })
+
+    const search=reactive({
+      key:'',
+    })
+     
+    const onSearch = () =>{
+      console.log("in Header search.key=",search.key)
+      if(stripscript(search.key)==false ||search.key==''){
+        alert("您输入的信息有误，请确认后重新输入");
+
+      }else{
+
+      context.root.$router.push({
+        path:'/search',
+        query:{
+          q:search.key,
+      },
+      })
+      }
+    }
+
+
     return{
       headData,
       now_url,
+      search,
+      onSearch,
     }
   }
 };

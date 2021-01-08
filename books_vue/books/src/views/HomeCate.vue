@@ -1,16 +1,16 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-17 16:19:21
- * @lastTime: 2020-12-20 00:17:17
+ * @lastTime: 2021-01-01 11:21:15
  * @LastAuthor: Do not edit
 -->
 <template>
   <div id="HomeCate">
     <Header />
-    <b-container>
+    <b-container class="mt-4 mb-2">
       <b-row>
         <b-col cols="12" md="7">
-          <h6>最新更新的小说</h6>
+          <h4>最新更新的小说</h4>
           <table
             role="table"
             aria-busy="false"
@@ -54,7 +54,7 @@
         </b-col>
         <b-col cols="12" md="1"> </b-col>
         <b-col cols="12" md="4">
-          <h6>最多阅读的小说</h6>
+          <h4>最多阅读的小说</h4>
           <table
             role="table"
             aria-busy="false"
