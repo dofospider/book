@@ -3,16 +3,19 @@
 '''
 Author: dofospider
 since: 2020-12-13 00:07:24
-lastTime: 2021-01-09 01:23:50
+lastTime: 2021-02-03 00:40:29
 LastAuthor: Do not edit
 '''
 from flask import Flask,request
 from flask.json import jsonify
 from book import Book
-from settings import BOOK_LIST
+from settings import BOOK_LIST, REQUEST_LISTS,RSA_1024_PRIV_KEY, TITLES
 
 import json
 import re
+import rsa
+import base64
+import time
 
 
 
@@ -26,6 +29,31 @@ def is_string_validate(str):
         return False
     else:
         return True
+
+
+def get_secret_key(cryptdata):
+    """
+    get_secret_key
+    """
+    privakey=rsa.PrivateKey.load_pkcs1(RSA_1024_PRIV_KEY)
+    msg=rsa.decrypt(base64.b64decode(cryptdata),privakey)
+    # print("str(msg)=",msg)
+
+    # print("str(msg)=",msg.decode().split(":")[1])
+
+    result={
+        "request_time":msg.decode().split(":")[0],     #get request time
+        "request_url":msg.decode().split(":")[1],      #fun 1
+        "request_infos":msg.decode().split(":")[2]     #fun 2
+    }
+    # print("result=",result)
+
+    # return msg.decode().split(":")[1]
+    return result
+
+# def get_now_time_13():
+#     return int(time.time()*1000)
+
 
 @app.route('/books_cates',methods=['GET'])
 def get_books_cates():
@@ -63,6 +91,15 @@ def get_cates_infos(book_cate):
         # print("in nomal case")
         get_data=json.loads(request.get_data(as_text=True))
         key=get_data['key']
+        secretKey=get_data["secretKey"]
+        secret_result=get_secret_key(secretKey)
+        if(int(time.time()*1000)-int(secret_result['request_time'])>30000):
+            resData={
+                "resCode":1,
+                "data":[],
+                "message":"error time",
+            }
+            return jsonify(resData)
 
         if book_cate in BOOK_LIST:
 
@@ -124,6 +161,14 @@ def get_book_infos_by_id(book_id):
         get_data=json.loads(request.get_data(as_text=True))
         key=get_data['key']
         secretKey=get_data['secretKey']
+        secret_result=get_secret_key(secretKey)
+        if(int(time.time()*1000)-int(secret_result['request_time'])>30000):
+            resData={
+                "resCode":1,
+                "data":[],
+                "message":"error time"
+            }
+            return jsonify(resData)
         if key=='index':
             book=Book()
             try:
@@ -271,6 +316,14 @@ def serach_info():
         get_data=json.loads(request.get_data(as_text=True))
         key=get_data['key']
         secretKey=get_data['secretKey']
+        secret_result=get_secret_key(secretKey)
+        if(int(time.time()*1000)-int(secret_result['request_time'])>30000):
+            resData={
+                "resCode":1,
+                "data":[],
+                "message":"error time"
+            }
+            return jsonify(resData)
         if is_string_validate(key):
             resData={
                 "resCode":1,
@@ -303,6 +356,38 @@ def serach_info():
         }
         
         return jsonify(resData)
+
+
+@app.route("/title",methods=['POST'])
+def get_titles_infos():
+    if request.method=='POST':
+        get_data=json.loads(request.get_data(as_text=True))
+        key=get_data['key']
+        secretKey=get_data['secretKey']
+        secret_result=get_secret_key(secretKey)
+        if(int(time.time()*1000)-int(secret_result['request_time'])>30000):
+            resData={
+                "resCode":1,
+                "data":[],
+                "message":"error time"
+            }
+            return jsonify(resData)
+
+        if secret_result['request_url'] not in REQUEST_LISTS:
+            resData={
+                "resCode":1,
+                "data":secret_result['request_url'],
+                "message":"error data"
+            }
+            return jsonify(resData)
+
+        resData={
+            "resCode":0,
+            "data":TITLES[secret_result['request_url']][key],
+            "message":"good"
+        }
+        return jsonify(resData)
+
 
 if __name__=='__main__':
     app.run(host='127.0.0.1',port=8080,debug=True)

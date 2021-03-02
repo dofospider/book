@@ -147,14 +147,12 @@ class Book(object):
             return data
 
     def search_infos_by_key(self,key):
-        print('key in book {}',key)
         sql='select * from book_infos where book_name="{}" or book_author="{}";'.format(key,key)
         self.cursor.execute(sql)
 
         data=[]
         for temp in self.cursor.fetchall():
             data.append(temp)
-        print('data',data)
         return data
 
 

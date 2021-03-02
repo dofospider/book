@@ -1,7 +1,7 @@
 <!--
  * @Author: dofospider
  * @since: 2020-12-16 14:49:16
- * @lastTime: 2021-01-08 23:42:11
+ * @lastTime: 2021-02-02 23:47:39
  * @LastAuthor: Do not edit
 -->
 <template>
@@ -20,6 +20,8 @@
 // @ is an alias to /src
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
+import { GetInfoPost  } from "../apis/read";
+import { ref, reactive,onMounted} from "@vue/composition-api";
 
 export default {
   name: "Home",
@@ -28,9 +30,21 @@ export default {
     Footer,
   },
   setup(props,context){
-    document.title="蜘蛛大人的小说";
-    document.querySelector("meta[name='keywords']").setAttribute("content","蜘蛛大人的keywords");
-    document.querySelector("meta[name='description']").setAttribute('content',"蜘蛛大人的descrption");
+    
+    const titlePramas=reactive({
+      url:'/title',
+      key:'index',
+
+    });
+
+    GetInfoPost(titlePramas).then(resp=>{
+      console.log("In home title=",resp.data.data);
+      document.title=resp.data.data[0];
+      document.querySelector("meta[name='keywords']").setAttribute("context",resp.data.data[1]);
+      document.querySelector("meta[name='description']").setAttribute("context",resp.data.data[2]);
+
+    });
+
 
   }
 };
